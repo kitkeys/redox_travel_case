@@ -4,7 +4,9 @@ ipad_height = 10;
 
 module outer_case(height) {
     corner_rad = 18;
+    corner_circumference = corner_rad * 2;
     bottom_rad = 4;
+    bottom_circumference = bottom_rad * 2;
     exterior_x = 196;
     exterior_y = 150;
 
@@ -12,9 +14,9 @@ module outer_case(height) {
         minkowski() {
             minkowski() {
                 cube([
-                    exterior_x - 2 * corner_rad - 1,
-                    exterior_y - 2 * corner_rad - (2 * bottom_rad),
-                    height - (2 * bottom_rad) - 1,
+                    exterior_x - corner_circumference - 1,
+                    exterior_y - corner_circumference - bottom_circumference,
+                    height - bottom_circumference - 1,
                 ]);
                 cylinder(r=corner_rad, h=1, $fn=300);
             }
@@ -84,6 +86,7 @@ module keeb(height) {
 
 module finger_hole(height, depth = 18) {
     finger_hole_rad = 14;
+    finger_hole_circumference = finger_hole_rad * 2;
     finger_hole_cutout_overhang = 6;
 
     translate([0, 0, finger_hole_rad])
@@ -92,13 +95,16 @@ module finger_hole(height, depth = 18) {
     translate([0, -finger_hole_rad - finger_hole_cutout_overhang, finger_hole_rad])
         cube([
             depth,
-            finger_hole_rad * 2 + finger_hole_cutout_overhang * 2,
+            finger_hole_circumference + finger_hole_cutout_overhang * 2,
             keys_height + keebcase_height - finger_hole_rad + 1,
         ]);
 }
 
 module receiver(height) {
-    cube([57 + 2, 38 + 2, height]);
+    x = 57;
+    y = 38;
+    padding = 2;
+    cube([x + padding, y + padding, height]);
     translate([-17, 14, 0])
         finger_hole(height);
 }
@@ -151,10 +157,11 @@ module keys(height) {
 }
 
 difference() {
-    outer_case(height=keys_height + keebcase_height + ipad_height);
+    case_height = keys_height + keebcase_height + ipad_height;
 
+    outer_case(height = case_height);
     translate([30, 26, -1])
-        keeb(height=keys_height + keebcase_height + ipad_height + 2);
+        keeb(height = case_height + 2);
     translate([5, 98, keys_height])
         finger_hole(keebcase_height + ipad_height, 26);
     translate([90, -19, keys_height])
