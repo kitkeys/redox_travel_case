@@ -5,12 +5,15 @@ ipad_height = 10;
 module outer_case(height) {
     corner_rad = 18;
     bottom_rad = 4;
+    exterior_x = 196;
+    exterior_y = 150;
+
     translate([corner_rad, corner_rad + bottom_rad, bottom_rad]) {
         minkowski() {
             minkowski() {
                 cube([
-                    196 - 2 * corner_rad - 1,
-                    150 - 2 * corner_rad - (2 * bottom_rad),
+                    exterior_x - 2 * corner_rad - 1,
+                    exterior_y - 2 * corner_rad - (2 * bottom_rad),
                     height - (2 * bottom_rad) - 1,
                 ]);
                 cylinder(r=corner_rad, h=1, $fn=300);
@@ -22,7 +25,7 @@ module outer_case(height) {
 
     // add corners back on two sides of minkowski
     cube([corner_rad, corner_rad, height]);
-    cube([196, corner_rad, height]);
+    cube([exterior_x, corner_rad, height]);
 }
 
 leg_len = 51; // 50mm actual
@@ -44,7 +47,7 @@ module keeb(height) {
 
     rad = 4;
     round_corner_offset = 2 * rad;
-    thumb_module_y = 67;  // orig 67
+    thumb_module_y = 62;  // orig 67
     thumb_module_x = 60;  // orig 60
 
     {
@@ -66,7 +69,7 @@ module keeb(height) {
             minkowski() {
                 cube([
                     thumb_module_x - round_corner_offset,
-                    62 - round_corner_offset,
+                    thumb_module_y - round_corner_offset,
                     height,
                 ]);
                 cylinder(r=rad, h=1);
