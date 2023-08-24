@@ -62,7 +62,7 @@ module keeb(height) {
 
     rad = 4;
     round_corner_offset = 2 * rad;
-    thumb_module_y = 62;  // orig 67
+    thumb_module_y = 64;  // orig 67
     thumb_module_x = 60;  // orig 60
 
     // leg cutouts
@@ -78,7 +78,7 @@ module keeb(height) {
         leg_cutout(height);
 
     rotate([0, 0, 30]) {
-        translate([-(rad + 0.75), -(15.5), 0]) {
+        translate([-(rad + 0.75), -(17.5), 0]) {
             // thumb cluster
             minkowski() {
                 cube([
