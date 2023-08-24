@@ -213,9 +213,9 @@ difference() {
     translate([90 + (8 * 4) / 3, 32, keys_height + 4])
         rotate([90, 0, 0])
             diamond_row(n = 4, scale = diamond_scale);
-    translate([153 + (8 * 3) / 3, 32, keys_height + 4])
+    translate([153 + (8 * 3) / 3, 32 + 5, keys_height + 4])
         rotate([90, 0, 0])
-            diamond_row(n = 3, scale = diamond_scale);
+            diamond_row(n = 3, scale = diamond_scale + 5);
 
     top_left_x = 39;
     translate([top_left_x, 155, keys_height + 4])
