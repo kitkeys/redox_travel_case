@@ -12,19 +12,23 @@ module outer_case(height) {
     exterior_y = 150;
 
     difference() {
-        translate([corner_rad, corner_rad + bottom_rad, bottom_rad]) {
-            minkowski() {
+        hull() {
+            translate([corner_rad, corner_rad + bottom_rad, bottom_rad]) {
                 minkowski() {
-                    cube([
-                        exterior_x - corner_circumference - 1,
-                        exterior_y - corner_circumference - bottom_circumference,
-                        height - bottom_circumference - 1,
-                    ]);
-                    cylinder(r=corner_rad, h=1, $fn=300);
+                    minkowski() {
+                        cube([
+                            exterior_x - corner_circumference - 1,
+                            exterior_y - corner_circumference - bottom_circumference,
+                            height - bottom_circumference - 1,
+                        ]);
+                        cylinder(r=corner_rad, h=1, $fn=300);
+                    }
+                    rotate([0, 90, 0])
+                        cylinder(r=bottom_rad, h=1, $fn=100);
                 }
-                rotate([0, 90, 0])
-                    cylinder(r=bottom_rad, h=1, $fn=100);
             }
+            // add corners back on two sides of minkowski
+            cube([exterior_x, corner_rad, height]);
         }
 
         // cutout for magnetic usb
@@ -32,10 +36,6 @@ module outer_case(height) {
         translate([(exterior_x / 2) - (usb_x / 2), exterior_y - corner_rad, keys_height])
             cube([usb_x, 30, height]);
     }
-
-    // add corners back on two sides of minkowski
-    cube([corner_rad, corner_rad, height]);
-    cube([exterior_x, corner_rad, height]);
 }
 
 leg_len = 51; // 50mm actual
