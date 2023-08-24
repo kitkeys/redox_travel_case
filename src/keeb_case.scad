@@ -169,6 +169,9 @@ difference() {
         finger_hole(keebcase_height + ipad_height, 26);
     translate([90, -19, keys_height])
         receiver(keebcase_height + ipad_height + 1);
+    // extra pocket
+    translate([154, -1, -.15])
+        cube([(196 - 154 - 4), 20, case_height + 1]);
     translate([5, -1, keys_height + keebcase_height])
         ipad(ipad_height + 1);
 }
