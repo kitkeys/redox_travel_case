@@ -50,10 +50,15 @@ module leg_cutout(height) {
 module keeb(height) {
     grace = 0.15;
     // actual 151 x 118
-    main_x = 151.75;
-    main_y = 118;
-    translate([0, 3, 0])
-        cube([main_x, main_y, height]);
+    main_x = 153.75;
+    main_y = 120;
+    main_r = 7.5;
+    main_circ = main_r * 2;
+    translate([main_r - 1, main_r + 1, 0])
+    minkowski() {
+        cube([main_x - main_circ, main_y - main_circ, height]);
+        cylinder(h = height, r = main_r);
+    }
 
     rad = 4;
     round_corner_offset = 2 * rad;
@@ -63,13 +68,13 @@ module keeb(height) {
     // leg cutouts
     top = main_y - leg_len + 3;
     // top left
-    translate([-(leg_width - grace), top - 20, 0])
+    translate([-(leg_width + 1 - grace), top - 22 - 2, 0])
         leg_cutout(height);
     // top right
-    translate([main_x - grace, top - (10 - 0.75), 0])
+    translate([main_x - 1 - grace, top - (10 - 0.75) - 2, 0])
         leg_cutout(height);
     // bottom right
-    translate([main_x - grace, 3 + 4, 0])
+    translate([main_x - 1 - grace, 3 + 4, 0])
         leg_cutout(height);
 
     rotate([0, 0, 30]) {
@@ -125,8 +130,8 @@ module ipad(height) {
 module keys(height) {
     // top left
     hull() {
-        translate([30, 127, 0])
-            cube([15, 20, height]);
+        translate([28, 127, 0])
+            cube([18, 20, height]);
         translate([45, 137, 0])
             cylinder(r=10, h=height, $fn=100);
     }
@@ -135,14 +140,15 @@ module keys(height) {
     // FIXME: rather kludgey
     hull() {
         translate([155, 135 + bottom_rad, bottom_rad]) {
+            x = 28.1;
             minkowski() {
-                cube([27.1, 14 - bottom_rad * 2, height - bottom_rad * 2]);
+                cube([x - 1, 14 - bottom_rad * 2, height - bottom_rad * 2]);
                 rotate([0, 90, 0])
                     cylinder(r=bottom_rad, h=1, $fn=100);
             }
 
             translate([0, -bottom_rad - 1,-bottom_rad]) {
-                cube([27.1, 11,  height]);
+                cube([x, 11,  height]);
             }
         }
 
