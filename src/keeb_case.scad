@@ -199,6 +199,28 @@ difference() {
         cube([(196 - 154 - 4), 20, case_height + 1]);
     translate([5, -1, keys_height + keebcase_height])
         ipad(ipad_height + 1);
+
+    // material reduction
+    translate([90 + (8 * 4) / 3, 32, keys_height + 4])
+        rotate([90, 0, 0])
+            diamond_row(n = 4, scale = 15);
+    translate([153 + (8 * 3) / 3, 32, keys_height + 4])
+        rotate([90, 0, 0])
+            diamond_row(n = 3, scale = 15);
+
+    translate([42, 155, keys_height + 4])
+        rotate([90, 0, 0])
+            diamond_row(n = 4, scale = 15);
+    translate([42 + 6, 155, keys_height + 4 + 8])
+        rotate([90, 0, 0])
+            diamond_row(n = 4, scale = 15);
+
+    translate([118, 155, keys_height + 4])
+        rotate([90, 0, 0])
+            diamond_row(n = 4, scale = 15);
+    translate([118 + 6, 155, keys_height + 4 + 8])
+        rotate([90, 0, 0])
+            diamond_row(n = 4, scale = 15);
 }
 
 keys(height = keys_height);
