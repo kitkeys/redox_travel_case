@@ -33,7 +33,7 @@ module outer_case(height) {
 
         // cutout for magnetic usb
         usb_x = 15;
-        translate([(exterior_x / 2) - (usb_x / 2), exterior_y - corner_rad, keys_height])
+        translate([(exterior_x / 2) - (usb_x / 2) + 5.5, exterior_y - corner_rad, keys_height])
             cube([usb_x, 30, height]);
     }
 }
