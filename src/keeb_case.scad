@@ -52,18 +52,14 @@ module keeb(height) {
     thumb_module_y = 62;  // orig 67
     thumb_module_x = 60;  // orig 60
 
-    {
-        // leg cutouts
-        top = main_y - leg_len + 3;
-        {
-            translate([-(leg_width - grace), top, 0])
-                leg_cutout(height);
-            translate([main_x - grace, top - (10 - 0.75), 0])
-                leg_cutout(height);
-            translate([main_x - grace, 3 + 4, 0])
-                leg_cutout(height);
-        }
-    }
+    // leg cutouts
+    top = main_y - leg_len + 3;
+    translate([-(leg_width - grace), top, 0])
+        leg_cutout(height);
+    translate([main_x - grace, top - (10 - 0.75), 0])
+        leg_cutout(height);
+    translate([main_x - grace, 3 + 4, 0])
+        leg_cutout(height);
 
     rotate([0, 0, 30]) {
         translate([-(rad + 0.75), -(15.5), 0]) {
