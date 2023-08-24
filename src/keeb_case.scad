@@ -152,9 +152,9 @@ module keys(height) {
         cylinder(r=2, h=height, $fn=100);
 }
 
-difference() {
-    case_height = keys_height + keebcase_height + ipad_height;
+case_height = keys_height + keebcase_height + ipad_height;
 
+difference() {
     outer_case(height = case_height);
     translate([30, 26, -1])
         keeb(height = case_height + 2);
@@ -162,9 +162,11 @@ difference() {
         finger_hole(keebcase_height + ipad_height, 26);
     translate([90, -19, keys_height])
         receiver(keebcase_height + ipad_height + 1);
-
     translate([5, 0, keys_height + keebcase_height])
         ipad(ipad_height + 1);
 }
 
-keys(height=keys_height);
+intersection() {
+    keys(height = keys_height);
+    outer_case(height = case_height);
+}
