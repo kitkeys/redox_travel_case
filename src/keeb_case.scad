@@ -158,10 +158,12 @@ module keys(height) {
 
     // bottom middle
     hull() {
-        translate([99, 27, 0])
-            cylinder(r=11, h=height, $fn=100);
-        translate([107, 27, 0])
-            cylinder(r=11, h=height, $fn=100);
+        offset_y = 27;
+        r = 13;
+        translate([101, offset_y, 0])
+            cylinder(r=r, h=height, $fn=100);
+        translate([105, offset_y, 0])
+            cylinder(r=r, h=height, $fn=100);
     }
 
     // bottom right
