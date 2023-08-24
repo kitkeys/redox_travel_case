@@ -2,10 +2,11 @@ keys_height = 15.6;
 keebcase_height = 18.4;
 ipad_height = 10;
 
+bottom_rad = 4;
+corner_rad = 18;
+
 module outer_case(height) {
-    corner_rad = 18;
     corner_circumference = corner_rad * 2;
-    bottom_rad = 4;
     bottom_circumference = bottom_rad * 2;
     exterior_x = 196;
     exterior_y = 150;
@@ -123,43 +124,56 @@ module ipad(height) {
 
 module keys(height) {
     // top left
-    translate([30, 127, 0])
-        cube([15, 20, height]);
-    translate([45, 137, 0])
-        cylinder(r=10, h=height, $fn=100);
+    hull() {
+        translate([30, 127, 0])
+            cube([15, 20, height]);
+        translate([45, 137, 0])
+            cylinder(r=10, h=height, $fn=100);
+    }
 
     // top right
-    difference() {
-        union() {
-            translate([155, 134, 0])
-                cube([27.1, 13, height]);
-            translate([155, 141, 0])
-                cylinder(r=7, h=height, $fn=100);
+    // FIXME: rather kludgey
+    hull() {
+        translate([155, 135 + bottom_rad, bottom_rad]) {
+            minkowski() {
+                cube([27.1, 14 - bottom_rad * 2, height - bottom_rad * 2]);
+                rotate([0, 90, 0])
+                    cylinder(r=bottom_rad, h=1, $fn=100);
+            }
+
+            translate([0, -bottom_rad - 1,-bottom_rad]) {
+                cube([27.1, 11,  height]);
+            }
         }
 
-        translate([145, 134 + 13, -1])
-            cube([40, 13, height + 10]);
+        translate([155, 141, 0])
+            cylinder(r=6, h=height, $fn=100);
     }
 
     // bottom middle
-    translate([99, 27, 0])
-        cylinder(r=11, h=height, $fn=100);
-    translate([99, 27, 0])
-        cube([8, 11, height]);
-    translate([107, 27, 0])
-        cylinder(r=11, h=height, $fn=100);
+    hull() {
+        translate([99, 27, 0])
+            cylinder(r=11, h=height, $fn=100);
+        translate([107, 27, 0])
+            cylinder(r=11, h=height, $fn=100);
+    }
 
-    // bottom left
-    translate([175, 27, 0])
-        cube([10, 17, height]);
-    translate([181, 44, 0])
-        cylinder(r=6, h=height, $fn=100);
+    // bottom right
+    hull() {
+        r = 6;
+        translate([175, 27, 0])
+            cube([r * 2, 17, height]);
+        translate([181, 44, 0])
+            cylinder(r=r, h=height, $fn=100);
+    }
 
-    // middle right nub
-    translate([27, 74, 0])
-        cube([7, 4, height]);
-    translate([34, 76, 0])
-        cylinder(r=2, h=height, $fn=100);
+    // middle left
+    hull() {
+        translate([27, 74, 0])
+            cube([7, 4, height]);
+        translate([34, 76, 0])
+            cylinder(r=2, h=height, $fn=100);
+    }
 }
 
 case_height = keys_height + keebcase_height + ipad_height;
@@ -179,7 +193,4 @@ difference() {
         ipad(ipad_height + 1);
 }
 
-intersection() {
-    keys(height = keys_height);
-    outer_case(height = case_height);
-}
+keys(height = keys_height);
