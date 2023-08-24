@@ -113,7 +113,7 @@ module receiver(height) {
 }
 
 module ipad(height) {
-    len = 247.6 / 2 + 8; // only half ipad per case
+    len = 247.6 / 2 + 9; // only half ipad per case
     wid = 178.5 + 8;
     cube([wid, len, height]);
 }
@@ -169,7 +169,7 @@ difference() {
         finger_hole(keebcase_height + ipad_height, 26);
     translate([90, -19, keys_height])
         receiver(keebcase_height + ipad_height + 1);
-    translate([5, 0, keys_height + keebcase_height])
+    translate([5, -1, keys_height + keebcase_height])
         ipad(ipad_height + 1);
 }
 
