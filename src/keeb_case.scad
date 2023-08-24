@@ -201,26 +201,30 @@ difference() {
         ipad(ipad_height + 1);
 
     // material reduction
+    diamond_scale = 15;
     translate([90 + (8 * 4) / 3, 32, keys_height + 4])
         rotate([90, 0, 0])
-            diamond_row(n = 4, scale = 15);
+            diamond_row(n = 4, scale = diamond_scale);
     translate([153 + (8 * 3) / 3, 32, keys_height + 4])
         rotate([90, 0, 0])
-            diamond_row(n = 3, scale = 15);
+            diamond_row(n = 3, scale = diamond_scale);
 
-    translate([42, 155, keys_height + 4])
+    top_left_x = 39;
+    translate([top_left_x, 155, keys_height + 4])
         rotate([90, 0, 0])
-            diamond_row(n = 4, scale = 15);
-    translate([42 + 6, 155, keys_height + 4 + 8])
+            diamond_row(n = 4, scale = diamond_scale);
+    translate([top_left_x + 6, 155, keys_height + 4 + 8])
         rotate([90, 0, 0])
-            diamond_row(n = 4, scale = 15);
+            diamond_row(n = 4, scale = diamond_scale);
 
-    translate([118, 155, keys_height + 4])
+    top_right_n = 5;
+    top_right_x = 118;
+    translate([top_right_x, 155, keys_height + 4])
         rotate([90, 0, 0])
-            diamond_row(n = 4, scale = 15);
-    translate([118 + 6, 155, keys_height + 4 + 8])
+            diamond_row(n = top_right_n, scale = diamond_scale);
+    translate([top_right_x + 6, 155, keys_height + 4 + 8])
         rotate([90, 0, 0])
-            diamond_row(n = 4, scale = 15);
+            diamond_row(n = top_right_n, scale = diamond_scale);
 }
 
 keys(height = keys_height);
