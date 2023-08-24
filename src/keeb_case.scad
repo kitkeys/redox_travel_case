@@ -119,13 +119,13 @@ module ipad(height) {
 }
 
 module keys(height) {
-    // top right
+    // top left
     translate([30, 127, 0])
         cube([15, 20, height]);
     translate([45, 137, 0])
         cylinder(r=10, h=height, $fn=100);
 
-    // top left
+    // top right
     difference() {
         union() {
             translate([155, 134, 0])
