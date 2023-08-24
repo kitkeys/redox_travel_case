@@ -81,7 +81,7 @@ module keeb(height) {
                     thumb_module_y - round_corner_offset,
                     height,
                 ]);
-                cylinder(r=rad, h=1);
+                cylinder(r=rad, h=1, $fn=40);
             }
 
             // leg cutout
