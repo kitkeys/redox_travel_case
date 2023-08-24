@@ -196,7 +196,7 @@ difference() {
         receiver(keebcase_height + ipad_height + 1);
     // extra pocket
     translate([154, -1, -.15])
-        cube([(196 - 154 - 4), 20, case_height + 1]);
+        cube([(196 - 158.5), 20, case_height + 1]);
     translate([5, -1, keys_height + keebcase_height])
         ipad(ipad_height + 1);
 
