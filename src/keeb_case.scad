@@ -61,10 +61,13 @@ module keeb(height) {
 
     // leg cutouts
     top = main_y - leg_len + 3;
+    // top left
     translate([-(leg_width - grace), top - 20, 0])
         leg_cutout(height);
+    // top right
     translate([main_x - grace, top - (10 - 0.75), 0])
         leg_cutout(height);
+    // bottom right
     translate([main_x - grace, 3 + 4, 0])
         leg_cutout(height);
 
