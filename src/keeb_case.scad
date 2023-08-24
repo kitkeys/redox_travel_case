@@ -176,6 +176,14 @@ module keys(height) {
     }
 }
 
+module diamond_row(n = 1, size = 8, scale = 1) {
+    for (i = [0 : n - 1]) {
+        translate([(size + 4) * i, 0, 0])
+            rotate([0, 0, 45])
+                cube([size, size, scale]);
+    }
+}
+
 case_height = keys_height + keebcase_height + ipad_height;
 
 difference() {
