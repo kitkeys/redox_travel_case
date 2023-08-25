@@ -6,8 +6,8 @@ bottom_rad = 4;
 corner_rad = 18;
 
 module outer_case(height) {
-    corner_circumference = corner_rad * 2;
-    bottom_circumference = bottom_rad * 2;
+    corner_diameter = corner_rad * 2;
+    bottom_diameter = bottom_rad * 2;
     exterior_x = 196;
     exterior_y = 150;
 
@@ -17,9 +17,9 @@ module outer_case(height) {
                 minkowski() {
                     minkowski() {
                         cube([
-                            exterior_x - corner_circumference - 1,
-                            exterior_y - corner_circumference - bottom_circumference,
-                            height - bottom_circumference - 1,
+                            exterior_x - corner_diameter - 1,
+                            exterior_y - corner_diameter - bottom_diameter,
+                            height - bottom_diameter - 1,
                         ]);
                         cylinder(r=corner_rad, h=1, $fn=300);
                     }
@@ -98,7 +98,7 @@ module keeb(height) {
 
 module finger_hole(height, depth = 18) {
     finger_hole_rad = 14;
-    finger_hole_circumference = finger_hole_rad * 2;
+    finger_hole_diameter = finger_hole_rad * 2;
     finger_hole_cutout_overhang = 6;
 
     translate([0, 0, finger_hole_rad])
@@ -107,7 +107,7 @@ module finger_hole(height, depth = 18) {
     translate([0, -finger_hole_rad - finger_hole_cutout_overhang, finger_hole_rad])
         cube([
             depth,
-            finger_hole_circumference + finger_hole_cutout_overhang * 2,
+            finger_hole_diameter + finger_hole_cutout_overhang * 2,
             keys_height + keebcase_height - finger_hole_rad + 1,
         ]);
 }
